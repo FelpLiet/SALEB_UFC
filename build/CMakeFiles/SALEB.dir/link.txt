@@ -1,0 +1,1 @@
+/usr/bin/gcc -g CMakeFiles/SALEB.dir/test/saleb.c.o CMakeFiles/SALEB.dir/src/abb.c.o -o SALEB 
