@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdlib.h>
+#include <stdio.h>
+
 typedef struct NO {
   int id;
 
@@ -7,12 +10,8 @@ typedef struct NO {
   struct NO* dir;
 } NO;
 
-NO *raiz_insert = NULL;
-NO *raiz = NULL;
-int tamp_temp = 0;
 
-#include <stdlib.h>
-#include <stdio.h>
+
 
 //busca pelo vertice
 NO* buscaRecursiva(NO *no, int id);
@@ -20,4 +19,10 @@ NO* buscaRecursiva(NO *no, int id);
 //insere um vertice na arvore
 NO *insere_na_arvore(NO *no, int id);
 
-void arvore(NO *raiz_insert, int vetor_de_id[], int inicio, int fim);
+void arvore( NO * raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim);
+
+void pos_ordem(NO *aux);
+
+void in_ordem(NO *aux);
+
+void pre_ordem(NO *aux);

@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/felpliet/Downloads/SALEB_UFC/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/SALEB.dir/test/saleb.c.o -c /home/felpliet/Downloads/SALEB_UFC/test/saleb.c",
+  "file": "/home/felpliet/Downloads/SALEB_UFC/test/saleb.c"
+},
+{
+  "directory": "/home/felpliet/Downloads/SALEB_UFC/build",
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/SALEB.dir/src/abb.c.o -c /home/felpliet/Downloads/SALEB_UFC/src/abb.c",
+  "file": "/home/felpliet/Downloads/SALEB_UFC/src/abb.c"
+}
+]
