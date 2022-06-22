@@ -54,6 +54,32 @@ void arvore(NO *raiz_insert, int vetor_de_id[], int inicio, int fim) {
   }
 }
 
+NO *abb_remove(NO *r, int v){
+  if(r == NULL){
+    return NULL;
+  }else if(r->id > v){
+    r->esq = abb_remove(r->esq, v);
+  }else if(r->id < v){
+    r->dir = abb_remove(r->dir, v);
+  }else{
+    if(r->esq == NULL && r->dir == NULL){
+      r = NULL;
+    }else if(r->esq == NULL){
+      NO *t = r;
+      r = r->esq;
+    }else{
+      NO *f = r->esq;
+      while(f->dir != NULL){
+        f = f->dir;
+      }
+      r->id = f->id;
+      f->id = v;
+      r->esq = abb_remove(r->esq, v);
+    }
+  }
+  return r;
+}
+
 void pos_ordem(NO *aux){
     
     if(aux->esq != NULL){
@@ -94,6 +120,16 @@ int main() {
   int vetor_de_id[] = {1, 2, 3, 4, 5, 6, 7};
 
   arvore(raiz_insert,vetor_de_id,0,tam-1);
+  printf("Pos Ordem:\n");
+  pos_ordem(raiz);
+  printf("\n\n");
+  printf("In Ordem:\n");
+  in_ordem(raiz);
+  printf("\n\n");
+  printf("Pre Ordem:\n");
+  pre_ordem(raiz);
+  abb_remove(raiz, 2);
+  printf("\n\n");
   printf("Pos Ordem:\n");
   pos_ordem(raiz);
   printf("\n\n");
