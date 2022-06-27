@@ -40,7 +40,7 @@ NO *insere_na_arvore(NO *no, int id)
   return no;
 }
 
-void arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
+NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
 {
   if (inicio <= fim)
   {

@@ -14,7 +14,7 @@ int main()
     int tam = 7;
     int vetor_de_id[] = {1, 2, 3, 4, 5, 6, 7};
 
-    arvore(raiz, raiz_insert, vetor_de_id, 0, tam - 1);
+    raiz = arvore(raiz, raiz_insert, vetor_de_id, 0, tam - 1);
     printf("Pos Ordem:\n");
     pos_ordem(raiz);
     printf("\n\n");
