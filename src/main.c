@@ -17,14 +17,21 @@ typedef struct list {
   struct list *prox;
 }list;
 
+// valores da arvore
 NO *raiz_insert = NULL;
 NO *raiz = NULL;
 int tamp_temp = 0;
 
+
+// valores da lista
 list *inicio = NULL;
 list *fim = NULL;
 int tam_list = 0;
 
+//id
+int ids = 1;
+
+// adiciona na lista
 void add_list(int id, char *nome){
   list *novo = (list*)malloc(sizeof(list));
   novo->id = id;
@@ -49,6 +56,29 @@ void add_list(int id, char *nome){
   }
 }
 
+void remover_na_list(list *aux, int id){
+  list *lixo = NULL;
+  if(id == inicio->id){
+    if(aux->prox != NULL){
+      inicio = aux->prox;
+      lixo = aux;
+      free(lixo);
+    }else{
+      lixo = aux;
+      free(lixo);
+      inicio == NULL;
+    }
+    return;
+  }else if(id != aux->prox->id){
+    remover_na_list(aux->prox, id);
+  }
+  lixo = aux->prox;
+  aux->prox = aux->prox->prox;
+  free(lixo);
+  return;
+}
+
+// imprime a lista
 void imprimir(list *aux){
   printf("%d ",aux->id);
   printf("%s", aux->nome);
@@ -60,6 +90,7 @@ void imprimir(list *aux){
   }
 }
 
+//busca na arvore
 NO* buscaRecursiva(NO *no, int id) {
   if (no == NULL)
     return NULL;
@@ -71,6 +102,7 @@ NO* buscaRecursiva(NO *no, int id) {
     return buscaRecursiva(no->dir, id);
 }
 
+//insere na arvore
 NO *insere_na_arvore(NO *no, int id) {
   list *aux = inicio;
   if (no == NULL){
@@ -96,6 +128,7 @@ NO *insere_na_arvore(NO *no, int id) {
   return no;
 }
 
+//busca o valor para depois chamar : incere_na_arvore
 void arvore(NO *raiz_insert, int vetor_de_id[], int inicio, int fim) {
   if (inicio <= fim) {
     int meio = (inicio + fim) / 2;
@@ -109,6 +142,7 @@ void arvore(NO *raiz_insert, int vetor_de_id[], int inicio, int fim) {
   }
 }
 
+//remove da arvore
 NO *abb_remove(NO *r, int v){
   if(r == NULL){
     return NULL;
@@ -133,6 +167,20 @@ NO *abb_remove(NO *r, int v){
     }
   }
   return r;
+}
+
+void apaga_abb(NO *aux)
+{
+	if (aux == NULL) {
+		return;
+	}
+
+	apaga_abb(aux->esq);
+	apaga_abb(aux->dir);
+
+	free(aux);
+
+	aux = NULL;
 }
 
 void pos_ordem(NO *aux){
@@ -174,6 +222,7 @@ void pre_ordem(NO *aux){
     }
 }
 
+//preecre o vetor "vetor_de_id" com os ids da lista
 void preenche_vec(int vetor_de_id[], int tam_vec){
   list *aux = inicio;
 
@@ -185,38 +234,87 @@ void preenche_vec(int vetor_de_id[], int tam_vec){
 
 int main() {
 
-  add_list(2, "jovi");
-  add_list(1, "pedro");
-  add_list(4, "billy");
-  add_list(3, "felp");
-  add_list(5, "wes");
-  imprimir(inicio);
-  printf("\n\n");
-  int tam_vec = fim->id;
-  int vetor_de_id[tam_vec];
-  preenche_vec(vetor_de_id, tam_vec);
+    int choice;
+    int seu_id;
+    char user_name[100];
+    do{
+        printf("--------------------------------\n"
+               "| 0 : Adicionar                |\n"
+               "| 1 : Remover                  |\n"
+               "| 2 : Imprimir                 |\n"
+               "| 3 : Buscar                   |\n"
+               "| 4 : Sair                     |\n"
+               "--------------------------------\n");
+        
+        printf("Digite: ");
+        scanf("%d", &choice);
+        
+    }while (choice != 0 && choice != 1 && choice != 2 && choice != 3 && choice != 4);
+
+    if(choice == 0){
+        printf("Digite seu nome: ");
+        scanf(" %[^\n]s ", user_name);
+        if(raiz != NULL){
+          apaga_abb(raiz);
+        }
+        add_list(ids, user_name);
+        int tam_vec = fim->id;
+        int vetor_de_id[tam_vec];
+        preenche_vec(vetor_de_id, tam_vec);
+        arvore(raiz_insert,vetor_de_id,0,tam_vec-1);
+        ids++;
+    }else if(choice == 1){
+        printf("Seu ID: ");
+        scanf("%d", &seu_id);
+        abb_remove(raiz, seu_id);
+        in_ordem(raiz);
+        //remover_na_list(inicio, seu_id);
+    }else if(choice == 2){
+        in_ordem(raiz);
+    }else if(choice == 3){
+        printf("Seu ID: ");
+        scanf("%d", &seu_id);
+        NO *busc = buscaRecursiva(raiz, seu_id);
+        printf("ID: %d\n", busc->id);
+        printf("Nome: %s\n", busc->nome);
+    }
+
+    if(choice != 4){
+        main();
+    }
+
+//   add_list(2, "jovi");
+//   add_list(1, "pedro");
+//   add_list(4, "billy");
+//   add_list(3, "felp");
+//   add_list(5, "wes");
+//   imprimir(inicio);
+//   printf("\n\n");
+//   int tam_vec = fim->id;
+//   int vetor_de_id[tam_vec];
+//   preenche_vec(vetor_de_id, tam_vec);
 
 
-  arvore(raiz_insert,vetor_de_id,0,tam_vec-1);
-  printf("Pos Ordem:\n");
-  pos_ordem(raiz);
-  printf("\n\n");
-  printf("In Ordem:\n");
-  in_ordem(raiz);
-  printf("\n\n");
-  printf("Pre Ordem:\n");
-  pre_ordem(raiz);
+//   arvore(raiz_insert,vetor_de_id,0,tam_vec-1);
+//   printf("Pos Ordem:\n");
+//   pos_ordem(raiz);
+//   printf("\n\n");
+//   printf("In Ordem:\n");
+//   in_ordem(raiz);
+//   printf("\n\n");
+//   printf("Pre Ordem:\n");
+//   pre_ordem(raiz);
 
-  abb_remove(raiz, 2);
-  printf("\n\n");
-  printf("Pos Ordem:\n");
-  pos_ordem(raiz);
-  printf("\n\n");
-  printf("In Ordem:\n");
-  in_ordem(raiz);
-  printf("\n\n");
-  printf("Pre Ordem:\n");
-  pre_ordem(raiz);
+//   abb_remove(raiz, 2);
+//   printf("\n\n");
+//   printf("Pos Ordem:\n");
+//   pos_ordem(raiz);
+//   printf("\n\n");
+//   printf("In Ordem:\n");
+//   in_ordem(raiz);
+//   printf("\n\n");
+//   printf("Pre Ordem:\n");
+//   pre_ordem(raiz);
 
   return 0;
 };
