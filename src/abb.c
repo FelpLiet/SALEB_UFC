@@ -2,6 +2,7 @@
 
 int tamp_temp = 0;
 
+
 NO *buscaRecursiva(NO *no, int id)
 {
   if (no == NULL)

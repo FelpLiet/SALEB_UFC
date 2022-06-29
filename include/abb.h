@@ -13,13 +13,14 @@ typedef struct NO {
 
 
 
+
 //busca pelo vertice
 NO* buscaRecursiva(NO *no, int id);
 
 //insere um vertice na arvore
 NO *insere_na_arvore(NO *no, int id);
 
-void arvore( NO * raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim);
+NO *arvore( NO * raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim);
 
 void pos_ordem(NO *aux);
 
