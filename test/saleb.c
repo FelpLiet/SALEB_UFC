@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/abb.h"
-#include "../include/lista.h"
+#include "../include/abb_encomendas.h"
+#include "../include/lista_acesso.h"
+#include "../include/fila_pedidos.h"
 
 // bonus por utilizar heap na fila
 
