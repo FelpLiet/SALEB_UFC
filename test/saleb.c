@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/abb_encomendas.h"
 #include "../include/lista_acesso.h"
 #include "../include/fila_pedidos.h"
-
 // bonus por utilizar heap na fila
 
 NO *raiz_insert = NULL;
@@ -11,8 +11,10 @@ NO *raiz = NULL;
 
 int main()
 {
-    carrega_dado();
-    printf("\nSISTEMA DE ENCOMENDA DE LIVRO\n");
+    char mem[1024] = {0};
+    no_encomenda teste;
+
+    printf("\nSISTEMA DE ALOCACAO DE LIVROS ENTRE BIBLIOTECAS DA UFC\n");
     int resp = -1;
     while (resp != 0)
     {
@@ -20,14 +22,26 @@ int main()
         printf(" 2 - Remover uma encomenda de livro.\n");
         printf(" 3 - Remover um pedido de livro.\n");
         printf(" 0 - Sair do sistema!\n");
+        
         printf("Digite a funcionalidade desejada:");
         scanf("%d", &resp);
+        
         if (resp == 1)
         {
             // encomendar um livro
             printf(" Digite o nome do aluno:\n");
-            char *nome = malloc(sizeof(char));
-            scanf(" %[^\n]s", nome);
+            if (fgets(mem, sizeof(mem), stdin) != NULL)
+            {
+                int mem_size = strlen(mem);
+                teste.nome_aluno = (char *)malloc((sizeof(char) * mem_size) + 1);
+                strncpy(teste.nome_aluno, mem, mem_size);
+                teste.nome_aluno[mem_size] = '\0';
+            }
+
+            printf(" Digite a matricula do aluno:\n");
+            scanf("%d", &teste.matricula_aluno);
+
+
             //... matricula e descricao..
             // criar um funcao para gerar id unico (:D)
             // add_abb(id, nome, matricula, descricao);
@@ -51,8 +65,8 @@ int main()
                 // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
                 // 4 - setar novos dados (faltando)
                 // 5 - add_fila(....);
-            }else 
-            if (resp == 3)
+            }
+            else if (resp == 3)
             {
 
                 // 2 - verificar o usuario
