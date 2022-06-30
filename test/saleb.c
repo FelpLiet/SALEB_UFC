@@ -11,6 +11,7 @@ NO *raiz = NULL;
 
 int main()
 {
+    carrega_dado();
     printf("\nSISTEMA DE ENCOMENDA DE LIVRO\n");
     int resp = -1;
     while (resp != 0)
