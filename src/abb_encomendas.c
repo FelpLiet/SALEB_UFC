@@ -57,6 +57,54 @@ NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
   }
 }
 
+NO *abb_remove(NO *r, int v){
+
+  if(r == NULL){
+
+    return NULL;
+
+  }else if(r->id > v){
+
+    r->esq = abb_remove(r->esq, v);
+
+  }else if(r->id < v){
+
+    r->dir = abb_remove(r->dir, v);
+
+  }else{
+
+    if(r->esq == NULL && r->dir == NULL){
+
+      r = NULL;
+
+    }else if(r->esq == NULL){
+
+      NO *t = r;
+
+      r = r->esq;
+
+    }else{
+
+      NO *f = r->esq;
+
+      while(f->dir != NULL){
+
+        f = f->dir;
+
+      }
+
+      r->id = f->id;
+      r->nome = f->nome;
+
+      f->id = v;
+
+      r->esq = abb_remove(r->esq, v);
+
+    }
+
+  }
+}
+
 void apaga_abb(NO *aux)
 {
 	if (aux == NULL) {
