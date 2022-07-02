@@ -6,8 +6,16 @@
 #include "../include/fila_pedidos.h"
 // bonus por utilizar heap na fila
 
-NO *raiz_insert = NULL;
-NO *raiz = NULL;
+no_encomenda *raiz_insert = NULL;
+no_encomenda *raiz = NULL;
+
+list *inicio = NULL;
+list *fim = NULL;
+int tam_list = 0;
+
+/*fiquei em duvida onde colocar a lista que faz a arvore 
+ai deixei um arquivo comentado pra quando for alterar
+o arquivo ta em src/arquivo_comentado.c*/
 
 int main()
 {
