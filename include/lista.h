@@ -11,7 +11,7 @@ typedef struct list {
 	char *nome_aluno;
 	int matricula_aluno;
 	char *titulo_livro;
-	char *resumo_livro;
+	char *autor_livro;
 	char *campus_livro;
 	char *campus_aluno;
 	char *responsavel_encomenda;
@@ -27,7 +27,7 @@ typedef struct list {
 
 void preenche_vec(int vetor_de_id[], int tam_vec);
 
-void add_list(int id, char *nome);
+void add_list(int id, char *nome, int matricula, char *titulo, char *autor);
 
 void imprimir(list *aux);
 

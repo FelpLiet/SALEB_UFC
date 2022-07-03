@@ -22,15 +22,34 @@ void preenche_vec(int vetor_de_id[], int tam_vec)
 	}
 }
 
-void add_list(int id, char *nome)
+void add_list(int id, char *nome, int matricula, char *titulo, char *autor)
 {
+	char mem[1024] = {0};
+	int mem_size = 0;
 
 	list *novo = (list *)malloc(sizeof(list));
 
 	novo->id = id;
 
+	novo->matricula_aluno = matricula;
+
+	mem_size = strlen(nome);
+	novo->nome_aluno = (char *)malloc((sizeof(char) * mem_size) + 1);
+	strncpy(novo->nome_aluno, nome, mem_size);
+	novo->nome_aluno[mem_size] = '\0';
+
+	mem_size = strlen(titulo);
+	novo->titulo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+	strncpy(novo->titulo_livro, titulo, mem_size);
+	novo->titulo_livro[mem_size] = '\0';
+
+	mem_size = strlen(autor);
+	novo->autor_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+	strncpy(novo->autor_livro, autor, mem_size);
+	novo->autor_livro[mem_size] = '\0';
+
 	// colocar os outros elementos
-	novo->nome_aluno = nome;
+	
 
 	novo->prox = NULL;
 
@@ -147,7 +166,7 @@ void reconstroi_arvore(no_encomenda *teste)
 	{
 		apaga_abb(return_raiz());
 	}
-	add_list(ids, teste->nome_aluno);
+	add_list(ids, teste->nome_aluno, teste->matricula_aluno, teste->titulo_livro, teste->autor_livro);
 
 	int tam_vec = tam_list;
 	// vetor_de_id tem o tamanho da lista
@@ -158,11 +177,4 @@ void reconstroi_arvore(no_encomenda *teste)
 	arvore(return_raiz_insert(), vetor_de_id, 0, tam_vec - 1);
 	// ids muda o id sequencialmente
 	ids++;
-	// add_list(ids, );
-	// int tam_vec = fim->id;
-	// int vetor_de_id[tam_vec];
-	// preenche_vec(vetor_de_id, tam_vec);
-	// arvore(vetor_de_id, 0, tam_vec - 1);
-	// ids++;
-	// in_ordem(return_raiz());
 }

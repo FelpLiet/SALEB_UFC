@@ -45,6 +45,10 @@ no_encomenda *insere_na_arvore(no_encomenda *no, int id)
 
         // coloca os outros elementos
         no->nome_aluno = aux->nome_aluno;
+        no->matricula_aluno = aux->matricula_aluno;
+        no->titulo_livro = aux->titulo_livro;
+        no->autor_livro = aux->autor_livro;
+
 
         no->esq = NULL;
         no->dir = NULL;
@@ -173,10 +177,10 @@ void copia_no(no_encomenda *origem, no_encomenda *destino)
 
     destino->prioridade = origem->prioridade;
 
-    mem_size = strlen(origem->resumo_livro);
-    destino->resumo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
-    strncpy(destino->resumo_livro, origem->resumo_livro, mem_size);
-    destino->resumo_livro[mem_size] = '\0';
+    mem_size = strlen(origem->autor_livro);
+    destino->autor_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(destino->autor_livro, origem->autor_livro, mem_size);
+    destino->autor_livro[mem_size] = '\0';
 
     mem_size = strlen(origem->titulo_livro);
     destino->titulo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);

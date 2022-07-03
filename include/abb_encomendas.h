@@ -6,7 +6,7 @@ typedef struct no_encomenda
 	char *nome_aluno;
 	int matricula_aluno;
 	char *titulo_livro;
-	char *resumo_livro;
+	char *autor_livro;
 	char *campus_livro;
 	char *campus_aluno;
 	char *responsavel_encomenda;

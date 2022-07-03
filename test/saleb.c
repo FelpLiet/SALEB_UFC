@@ -12,7 +12,7 @@ int main()
 {
     carrega_dado_lista_de_permicao();
     char mem[1024] = {0};
-    int id, escolha;
+    int id, escolha, id_remove;
     no_encomenda teste;
 
     printf("\nSISTEMA DE ALOCACAO DE LIVROS ENTRE BIBLIOTECAS DA UFC\n");
@@ -46,34 +46,36 @@ int main()
             printf("Digite a matricula do aluno: ");
             scanf("%d%*c", &teste.matricula_aluno);
 
-            reconstroi_arvore(&teste);
-            
-            // aumenta o tamanho da arvore
-            tamp_temp++;
-            // if (raiz != NULL)
-            // {
-            //     apaga_abb(raiz);
-            // }
-            // add_list(ids, teste.nome_aluno);
-            // int tam_vec = fim->id;
-            // int vetor_de_id[tam_vec];
-            // preenche_vec(vetor_de_id, tam_vec);
-            // arvore(vetor_de_id, 0, tam_vec - 1);
-            // ids++;
-            // in_ordem(raiz);
+            printf("Insira o titulo do livro: ");
+            if (fgets(mem, sizeof(mem), stdin) != NULL)
+            {
+                int mem_size = strlen(mem);
+                teste.titulo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+                strncpy(teste.titulo_livro, mem, mem_size);
+                teste.titulo_livro[mem_size] = '\0';
+            }
 
-            //... matricula e descricao..
-            // criar um funcao para gerar id unico (:D)
-            // add_abb(id, nome, matricula, descricao);
+            printf("Insira o autor do livro: ");
+            if (fgets(mem, sizeof(mem), stdin) != NULL)
+            {
+                int mem_size = strlen(mem);
+                teste.autor_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+                strncpy(teste.autor_livro, mem, mem_size);
+                teste.autor_livro[mem_size] = '\0';
+            }
+
+            reconstroi_arvore(&teste);
+
+            tamp_temp++;
         }
         else if (resp == 2)
         {
-            // remover uma encomenda de livro da ABB (id)
-            // para remover eu preciso:
             int estado_encomenda = -1;
             while (estado_encomenda != 0)
-            { // 1 - visualizar as encomendas (in_ordem)
+            {
                 printf("--------------------------------------------------\n"
+                       "|                     SALEB                      |\n"
+                       "|                MENU SECRETARIOS                |\n"
                        "|                                                |\n"
                        "| 1 - Listar id das encomendas                   |\n"
                        "| 2 - Remover da lista de encomenda pelo id      |\n"
@@ -88,23 +90,19 @@ int main()
                 }
                 else if (estado_encomenda == 2)
                 {
-                    // 2 - verificar o usuario
-                    printf(" Digite seu cpf:\n");
+
+                    printf("Qual o id para remocao: ");
+                    scanf("%d", &id_remove);
+                    printf("Digite seu cpf: ");
                     char cpf[100];
                     scanf("%s", cpf);
-                    printf(" Digite sua senha:\n");
+                    printf("Digite sua senha: ");
                     char senha[100];
                     scanf("%s", senha);
                     if (verificar_acesso_secretario(cpf, senha) == 1)
                     {
-                        int id_remove;
-                        printf("qualo id para remocao:\n");
-                        scanf("%d", &id_remove);
-                        add_fila_pedidos(buscaRecursiva(return_raiz(), id), cpf);
-                        apaga_abb(buscaRecursiva(return_raiz(), id));
-                        // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
-                        // 4 - setar novos dados (faltando)
-                        // 5 - add_fila(....);
+                        add_fila_pedidos(buscaRecursiva(return_raiz(), id_remove), cpf);
+                        apaga_abb(buscaRecursiva(return_raiz(), id_remove));
                     }
                     else
                     {
@@ -119,37 +117,41 @@ int main()
         }
         else if (resp == 3)
         {
-
-            printf("--------------------------------------------------\n"
-                   "|                                                |\n"
-                   "| 1 - Remover livro para entrega                 |\n"
-                   "| 0 - Voltar ao menu                             |\n"
-                   "|                                                |\n"
-                   "--------------------------------------------------\n");
-            printf("Digite a funcionalidade desejada:");
-            scanf("%d%*c", &escolha);
-            if (escolha == 1)
+            int estado_entrega = -1;
+            while (estado_entrega != 0)
             {
-                // 2 - verificar o usuario
-                printf(" Digite seu cpf:\n");
-                char cpf[100];
-                scanf("%s", cpf);
-                printf(" Digite sua senha:\n");
-                char senha[100];
-                scanf("%s", senha);
-                if (verificar_acesso_transportador(cpf, senha) == 1)
+                printf("--------------------------------------------------\n"
+                       "|                     SALEB                      |\n"
+                       "|               MENU TRANSPORTADOR               |\n"
+                       "|                                                |\n"
+                       "| 1 - Remover livro para entrega                 |\n"
+                       "| 0 - Voltar ao menu                             |\n"
+                       "|                                                |\n"
+                       "--------------------------------------------------\n");
+                printf("Digite a funcionalidade desejada:");
+                scanf("%d%*c", &estado_entrega);
+                if (estado_entrega == 1)
                 {
-                    // remover da fila de prioridade
-                    remover_da_fila_de_prioridade();
+
+                    printf("Digite seu cpf: ");
+                    char cpf[100];
+                    scanf("%s", cpf);
+                    printf("Digite sua senha: ");
+                    char senha[100];
+                    scanf("%s", senha);
+                    if (verificar_acesso_transportador(cpf, senha) == 1)
+                    {
+                        ver_prioridade();
+                    }
+                    else
+                    {
+                        puts("Usuario nao encontrado");
+                    }
                 }
                 else
                 {
-                    puts("Usuario nao encontrado");
+                    puts("Restornando");
                 }
-            }
-            else
-            {
-                puts("Restornando");
             }
         }
     }

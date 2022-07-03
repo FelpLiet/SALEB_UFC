@@ -15,13 +15,13 @@ void add_lista_de_acesso(char *nome, char *cpf, char *senha, char *cargo_de_aces
     novo->prox = NULL;
 
     if (inicio_acess == NULL)
-    { // lista vazia
+    { 
         inicio_acess = novo;
         fim_acess = novo;
         tam_acess++;
     }
     else
-    { // fim_acess
+    { 
         fim_acess->prox = novo;
         fim_acess = novo;
         tam_acess++;
@@ -44,14 +44,14 @@ int verificar_acesso_secretario(char *cpf, char *senha){
     if((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0 && (strcmp(inicio_acess->cargo_de_acesso, "secretario") == 0))){
         return 1;
     }
-    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(inicio_acess->cargo_de_acesso, "secretario") == 0))){
+    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "secretario") == 0))){
         return 1;
     }
 
     acess *aux = inicio_acess->prox;
 
     for(int i = 0; i < tam_acess - 2; i++){
-        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(inicio_acess->cargo_de_acesso, "secretario") == 0)){
+        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "secretario") == 0)){
             return 1;
         }
         aux = aux->prox;
@@ -63,14 +63,14 @@ int verificar_acesso_transportador(char *cpf, char *senha){
     if((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0) && (strcmp(inicio_acess->cargo_de_acesso, "transportador") == 0)){
         return 1;
     }
-    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(inicio_acess->cargo_de_acesso, "transportador") == 0))){
+    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "transportador") == 0))){
         return 1;
     }
 
     acess *aux = inicio_acess->prox;
 
     for(int i = 0; i < tam_acess - 2; i++){
-        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(inicio_acess->cargo_de_acesso, "transportador") == 0)){
+        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "transportador") == 0)){
             return 1;
         }
         aux = aux->prox;
