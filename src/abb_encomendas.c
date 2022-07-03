@@ -3,7 +3,7 @@
 int tamp_temp = 0;
 
 
-NO *buscaRecursiva(NO *no, int id)
+no_encomenda *buscaRecursiva(no_encomenda *no, int id)
 {
   if (no == NULL)
     return NULL;
@@ -15,7 +15,7 @@ NO *buscaRecursiva(NO *no, int id)
     return buscaRecursiva(no->dir, id);
 }
 
-NO *insere_na_arvore(NO *no, int id)
+no_encomenda *insere_na_arvore(no_encomenda *no, int id)
 {
   if (no == NULL)
   {
@@ -41,7 +41,7 @@ NO *insere_na_arvore(NO *no, int id)
   return no;
 }
 
-NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
+no_encomenda *arvore(no_encomenda *raiz, no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim)
 {
   if (inicio <= fim)
   {
@@ -57,7 +57,7 @@ NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
   }
 }
 
-void pos_ordem(NO *aux)
+void pos_ordem(no_encomenda *aux)
 {
 
     if (aux->esq != NULL)
@@ -71,7 +71,7 @@ void pos_ordem(NO *aux)
     printf("ID: ");
     printf("%d\t", aux->id);
 }
-void in_ordem(NO *aux)
+void in_ordem(no_encomenda *aux)
 {
 
     if (aux->esq != NULL)
@@ -86,7 +86,7 @@ void in_ordem(NO *aux)
         in_ordem(aux->dir);
     }
 }
-void pre_ordem(NO *aux)
+void pre_ordem(no_encomenda *aux)
 {
     printf("ID: ");
     printf("%d", aux->id);

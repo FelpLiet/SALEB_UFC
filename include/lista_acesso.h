@@ -10,9 +10,9 @@ typedef  struct acess {
     struct acess* prox;
 }acess;
 
-acess * inicio = NULL;
-acess * fim = NULL;
-int tam = 0;
+acess * inicio_acess = NULL;
+acess * fim_acess = NULL;
+int tam_acess = 0;
 
 
 int verificar_acesso(char *cpf, char *senha);

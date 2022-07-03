@@ -11,6 +11,7 @@ NO *raiz = NULL;
 
 int main()
 {
+    carrega_dado_lista_de_permicao();
     char mem[1024] = {0};
     no_encomenda teste;
 
@@ -59,8 +60,7 @@ int main()
             printf(" Digite sua senha:\n");
             char senha[100];
             scanf("%s", &senha);
-            int retorno = verificar(cpf, senha);
-            if (retorno == 1)
+            if (verificar_acesso(cpf, senha) == 1)
             {
                 // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
                 // 4 - setar novos dados (faltando)
@@ -85,18 +85,6 @@ int main()
         }
     }
     // codigo jv
-    int tam = 7;
-    int vetor_de_id[] = {1, 2, 3, 4, 5, 6, 7};
-
-    raiz = arvore(raiz, raiz_insert, vetor_de_id, 0, tam - 1);
-    printf("Pos Ordem:\n");
-    pos_ordem(raiz);
-    printf("\n\n");
-    printf("In Ordem:\n");
-    in_ordem(raiz);
-    printf("\n\n");
-    printf("Pre Ordem:\n");
-    pre_ordem(raiz);
 
     return 0;
 }

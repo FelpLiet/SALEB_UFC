@@ -17,9 +17,9 @@ typedef struct lista_pedidos
 
 }lista_pedidos;
 
-lista_pedidos * inicio = NULL;
-lista_pedidos * fim = NULL;
-int tam = 0;
+lista_pedidos * inicio_pedido = NULL;
+lista_pedidos * fim_pedido = NULL;
+int tam_pedido = 0;
 
 void add_lista_pedidos(no_encomenda *pedido);
 
