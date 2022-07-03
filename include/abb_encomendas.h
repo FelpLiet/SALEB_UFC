@@ -1,17 +1,5 @@
 #pragma once
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-typedef struct NO {
-  int id;
-  char *nome;
-
-  struct NO *esq;
-  struct NO *dir;
-} NO;
-
 typedef struct no_encomenda
 {
 	int id;
@@ -29,9 +17,26 @@ typedef struct no_encomenda
 	struct no_encomenda *esq;
 }no_encomenda;
 
-no_encomenda *raiz_insert;
-no_encomenda *raiz;
-int tamp_temp;
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "fila_pedidos.h"
+#include "lista_acesso.h"
+#include "lista.h"
+typedef struct NO {
+  int id;
+  char *nome;
+
+  struct NO *esq;
+  struct NO *dir;
+} NO;
+
+
+// no_encomenda *raiz_insert;
+// no_encomenda *raiz;
+// int tamp_temp;
+
+no_encomenda *return_raiz();
 
 // busca pelo vertice
 no_encomenda *buscaRecursiva(no_encomenda *no, int id);
@@ -40,6 +45,8 @@ no_encomenda *buscaRecursiva(no_encomenda *no, int id);
 no_encomenda *insere_na_arvore(no_encomenda *no, int id);
 
 no_encomenda *arvore(int vetor_de_id[], int inicio, int fim);
+
+void copia_no(no_encomenda *origem, no_encomenda *dentino);
 
 void apaga_abb(no_encomenda *aux);
 

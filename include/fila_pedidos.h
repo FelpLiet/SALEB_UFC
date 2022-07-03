@@ -1,7 +1,7 @@
 #pragma once
 #include "abb_encomendas.h"
 #include "lista_acesso.h"
-
+#include "lista.h"
 typedef struct fila_pedidos
 {
 	char *nome_aluno;
@@ -18,9 +18,9 @@ typedef struct fila_pedidos
 
 } fila_pedidos;
 
-fila_pedidos *inicio_pedido;
-fila_pedidos *fim_pedido;
-int tam_pedido;
+// fila_pedidos *inicio_pedido;
+// fila_pedidos *fim_pedido;
+// int tam_pedido;
 
 void add_fila_pedidos(no_encomenda *pedido, char *cpf);
 

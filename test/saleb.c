@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/abb_encomendas.h"
-#include "../include/lista.h"
 #include "../include/lista_acesso.h"
 #include "../include/fila_pedidos.h"
+#include "../include/lista.h"
 
 int main()
 {
@@ -26,13 +26,13 @@ int main()
                "|                                                |\n"
                "--------------------------------------------------\n");
 
-        printf("Digite a funcionalidade desejada:");
+        printf("Digite a funcionalidade desejada: ");
         scanf("%d%*c", &resp);
 
         if (resp == 1)
         {
             // encomendar um livro
-            printf(" Digite o nome do aluno:\n");
+            printf("Digite o nome do aluno: ");
             if (fgets(mem, sizeof(mem), stdin) != NULL)
             {
                 int mem_size = strlen(mem);
@@ -41,20 +41,21 @@ int main()
                 teste.nome_aluno[mem_size] = '\0';
             }
 
-            printf(" Digite a matricula do aluno:\n");
+            printf("Digite a matricula do aluno: ");
             scanf("%d%*c", &teste.matricula_aluno);
 
-            if (raiz != NULL)
-            {
-                apaga_abb(raiz);
-            }
-            add_list(ids, teste.nome_aluno);
-            int tam_vec = fim->id;
-            int vetor_de_id[tam_vec];
-            preenche_vec(vetor_de_id, tam_vec);
-            arvore(vetor_de_id, 0, tam_vec - 1);
-            ids++;
-            in_ordem(raiz);
+            reconstroi_arvore(&teste);
+            // if (raiz != NULL)
+            // {
+            //     apaga_abb(raiz);
+            // }
+            // add_list(ids, teste.nome_aluno);
+            // int tam_vec = fim->id;
+            // int vetor_de_id[tam_vec];
+            // preenche_vec(vetor_de_id, tam_vec);
+            // arvore(vetor_de_id, 0, tam_vec - 1);
+            // ids++;
+            // in_ordem(raiz);
 
             //... matricula e descricao..
             // criar um funcao para gerar id unico (:D)
@@ -78,7 +79,7 @@ int main()
                 scanf("%d%*c", &estado_encomenda);
                 if (estado_encomenda == 1)
                 {
-                    in_ordem(raiz);
+                    in_ordem(return_raiz());
                 }
                 else if (estado_encomenda == 2)
                 {
@@ -94,8 +95,8 @@ int main()
                         int id_remove;
                         printf("qualo id para remocao:\n");
                         scanf("%d", &id_remove);
-                        add_fila_pedidos(buscaRecursiva(raiz, id), cpf);
-                        apaga_abb(buscaRecursiva(raiz, id));
+                        add_fila_pedidos(buscaRecursiva(return_raiz(), id), cpf);
+                        apaga_abb(buscaRecursiva(return_raiz(), id));
                         // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
                         // 4 - setar novos dados (faltando)
                         // 5 - add_fila(....);

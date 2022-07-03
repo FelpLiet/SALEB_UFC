@@ -1,6 +1,8 @@
 #pragma once 
 
 #include "abb_encomendas.h"
+#include "fila_pedidos.h"
+#include "lista.h"
 
 typedef  struct acess {
     char* nome;
@@ -10,9 +12,9 @@ typedef  struct acess {
     struct acess* prox;
 }acess;
 
-acess * inicio_acess;
-acess * fim_acess;
-int tam_acess;
+// acess * inicio_acess;
+// acess * fim_acess;
+// int tam_acess;
 
 
 int verificar_acesso_secretario(char *cpf, char *senha);
