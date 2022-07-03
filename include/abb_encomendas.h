@@ -35,6 +35,7 @@ typedef struct NO {
 // no_encomenda *raiz_insert;
 // no_encomenda *raiz;
 // int tamp_temp;
+no_encomenda *return_raiz_insert();
 
 no_encomenda *return_raiz();
 
@@ -44,7 +45,7 @@ no_encomenda *buscaRecursiva(no_encomenda *no, int id);
 // insere um vertice na arvore
 no_encomenda *insere_na_arvore(no_encomenda *no, int id);
 
-no_encomenda *arvore(int vetor_de_id[], int inicio, int fim);
+void arvore(no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim);
 
 void copia_no(no_encomenda *origem, no_encomenda *dentino);
 

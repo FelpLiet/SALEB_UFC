@@ -29,7 +29,8 @@ void preenche_vec(int vetor_de_id[], int tam_vec);
 
 void add_list(int id, char *nome);
 
-void imprimir(list *fim,list *aux);
+void imprimir(list *aux);
 
 void reconstroi_arvore(no_encomenda *teste);
 
+list *return_inicio_list();

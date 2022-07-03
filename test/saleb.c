@@ -6,6 +6,8 @@
 #include "../include/fila_pedidos.h"
 #include "../include/lista.h"
 
+int tamp_temp = 0;
+
 int main()
 {
     carrega_dado_lista_de_permicao();
@@ -45,6 +47,9 @@ int main()
             scanf("%d%*c", &teste.matricula_aluno);
 
             reconstroi_arvore(&teste);
+            
+            // aumenta o tamanho da arvore
+            tamp_temp++;
             // if (raiz != NULL)
             // {
             //     apaga_abb(raiz);

@@ -1,8 +1,12 @@
 #include "../include/abb_encomendas.h"
 
-int tamp_temp = 0;
+
 no_encomenda *raiz_insert = NULL;
 no_encomenda *raiz = NULL;
+
+no_encomenda *return_raiz_insert(){
+    return raiz_insert;
+}
 
 no_encomenda *return_raiz()
 {
@@ -23,13 +27,27 @@ no_encomenda *buscaRecursiva(no_encomenda *no, int id)
 
 no_encomenda *insere_na_arvore(no_encomenda *no, int id)
 {
+    list *aux = return_inicio_list();
     if (no == NULL)
     {
         no = (no_encomenda *)malloc(sizeof(no_encomenda));
         no->id = id;
+
+        if (aux->id < id)
+        {
+
+            while (aux->id < id)
+            {
+
+                aux = aux->prox;
+            }
+        }
+
+        // coloca os outros elementos
+        no->nome_aluno = aux->nome_aluno;
+
         no->esq = NULL;
         no->dir = NULL;
-        tamp_temp++;
     }
     else if (id < (no->id))
     {
@@ -47,19 +65,25 @@ no_encomenda *insere_na_arvore(no_encomenda *no, int id)
     return no;
 }
 
-no_encomenda *arvore(int vetor_de_id[], int inicio, int fim)
+void arvore(no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim)
 {
+
     if (inicio <= fim)
     {
+
         int meio = (inicio + fim) / 2;
+
         raiz_insert = insere_na_arvore(raiz_insert, vetor_de_id[meio]);
+
         if (raiz == NULL)
         {
+
             raiz = raiz_insert;
         }
 
-        arvore(vetor_de_id, inicio, meio - 1);
-        arvore(vetor_de_id, meio + 1, fim);
+        arvore(raiz_insert, vetor_de_id, inicio, meio - 1);
+
+        arvore(raiz_insert, vetor_de_id, meio + 1, fim);
     }
 }
 
@@ -76,6 +100,55 @@ void apaga_abb(no_encomenda *aux)
     free(aux);
 
     aux = NULL;
+}
+
+
+no_encomenda *abb_remove(no_encomenda *r, int v){
+
+  if(r == NULL){
+
+    return NULL;
+
+  }else if(r->id > v){
+
+    r->esq = abb_remove(r->esq, v);
+
+  }else if(r->id < v){
+
+    r->dir = abb_remove(r->dir, v);
+
+  }else{
+
+    if(r->esq == NULL && r->dir == NULL){
+
+      r = NULL;
+
+    }else if(r->esq == NULL){
+
+      no_encomenda *t = r;
+
+      r = r->esq;
+
+    }else{
+
+      no_encomenda *f = r->esq;
+
+      while(f->dir != NULL){
+
+        f = f->dir;
+
+      }
+
+      r->id = f->id;
+      r->nome_aluno = f->nome_aluno;
+
+      f->id = v;
+
+      r->esq = abb_remove(r->esq, v);
+
+    }
+
+  }
 }
 
 void copia_no(no_encomenda *origem, no_encomenda *destino)
