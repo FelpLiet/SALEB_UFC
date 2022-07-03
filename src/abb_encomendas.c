@@ -3,7 +3,7 @@
 int tamp_temp = 0;
 
 
-NO *buscaRecursiva(NO *no, int id)
+no_encomenda *buscaRecursiva(no_encomenda *no, int id)
 {
   if (no == NULL)
     return NULL;
@@ -15,11 +15,11 @@ NO *buscaRecursiva(NO *no, int id)
     return buscaRecursiva(no->dir, id);
 }
 
-NO *insere_na_arvore(NO *no, int id)
+no_encomenda *insere_na_arvore(no_encomenda *no, int id)
 {
   if (no == NULL)
   {
-    no = (NO *)malloc(sizeof(NO));
+    no = (no_encomenda *)malloc(sizeof(no_encomenda));
     no->id = id;
     no->esq = NULL;
     no->dir = NULL;
@@ -41,7 +41,7 @@ NO *insere_na_arvore(NO *no, int id)
   return no;
 }
 
-NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
+no_encomenda *arvore(no_encomenda *raiz, no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim)
 {
   if (inicio <= fim)
   {
@@ -57,7 +57,7 @@ NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
   }
 }
 
-void apaga_abb(NO *aux)
+void apaga_abb(no_encomenda *aux)
 {
 	if (aux == NULL) {
 		return;
@@ -71,7 +71,7 @@ void apaga_abb(NO *aux)
 	aux = NULL;
 }
 
-void pos_ordem(NO *aux){
+void pos_ordem(no_encomenda *aux){
     
     if(aux->esq != NULL){
         pos_ordem(aux->esq);
@@ -82,26 +82,29 @@ void pos_ordem(NO *aux){
     printf("ID: ");
     printf("%d\t", aux->id);
     printf("Nome: ");
-    printf("%s\n", aux->nome);
+    printf("%s\n", aux->nome_aluno);
 }
-void in_ordem(NO *aux){
-    
-    if(aux->esq != NULL){
+void in_ordem(no_encomenda *aux)
+{
+
+    if (aux->esq != NULL)
+    {
         in_ordem(aux->esq);
     }
     printf("ID: ");
     printf("%d\t", aux->id);
     printf("Nome: ");
-    printf("%s\n", aux->nome);
+    printf("%s\n", aux->nome_aluno);
     if(aux->dir != NULL){
         in_ordem(aux->dir);
     }
 }
-void pre_ordem(NO *aux){
+void pre_ordem(no_encomenda *aux)
+{
     printf("ID: ");
     printf("%d\t", aux->id);
     printf("Nome: ");
-    printf("%s\n", aux->nome);
+    printf("%s\n", aux->nome_aluno);
     if(aux->esq != NULL){
         pre_ordem(aux->esq);
     }

@@ -10,11 +10,13 @@ typedef  struct acess {
     struct acess* prox;
 }acess;
 
-acess * inicio = NULL;
-acess * fim = NULL;
-int tam = 0;
 
 
-int verificar_acesso(char *cpf, char *senha);
+
+int verificar_acesso_secretario(char *cpf, char *senha);
+
+int verificar_acesso_transportador(char *cpf, char *senha);
+
+char* busca_nome_acesso(char * cpf);
 
 void carrega_dado_lista_de_permicao();

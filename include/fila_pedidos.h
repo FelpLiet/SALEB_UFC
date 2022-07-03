@@ -1,5 +1,6 @@
 #pragma once
 #include "abb_encomendas.h"
+#include "lista_acesso.h"
 
 typedef struct lista_pedidos
 {
@@ -17,11 +18,9 @@ typedef struct lista_pedidos
 
 }lista_pedidos;
 
-lista_pedidos * inicio = NULL;
-lista_pedidos * fim = NULL;
-int tam = 0;
 
-void add_lista_pedidos(no_encomenda *pedido);
+
+void add_lista_pedidos(no_encomenda *pedido, char *cpf);
 
 void remover_da_fila_de_prioridade();
 

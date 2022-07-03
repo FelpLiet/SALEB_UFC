@@ -1,47 +1,67 @@
 #include "../include/fila_pedidos.h"
 
-void add_lista_pedidos(no_encomenda *pedido)
+lista_pedidos *inicio_pedido = NULL;
+lista_pedidos *fim_pedido = NULL;
+int tam_pedido = 0;
+
+void add_lista_pedidos(no_encomenda *pedido, char *cpf)
 {
     lista_pedidos *novo = malloc(sizeof(lista_pedidos));
-    novo->campus_aluno = pedido->campus_aluno;
+
+    char mem[1024] = {0};
+    
+    
+    int mem_size = strlen(busca_nome_acesso(cpf));
+    novo->responsavel_encomenda = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->responsavel_encomenda, busca_nome_acesso(cpf), mem_size);
+    novo->responsavel_encomenda[mem_size] = '\0';
+    
+
+
+    novo->campus_aluno = campus_aluno;
     novo->campus_livro = pedido->campus_livro;
     novo->matricula_aluno = pedido->matricula_aluno;
     novo->nome_aluno = pedido->nome_aluno;
     novo->prioridade = pedido->prioridade;
-    novo->responsavel_encomenda = pedido->responsavel_encomenda;
+
+    int mem_size = strlen(busca_nome_acesso(cpf));
+    novo->responsavel_encomenda = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->responsavel_encomenda, busca_nome_acesso(cpf), mem_size);
+    novo->responsavel_encomenda[mem_size] = '\0';
+
     novo->responsavel_trasporte = pedido->responsavel_trasporte;
     novo->resumo_livro = pedido->resumo_livro;
     novo->titulo_livro = pedido->titulo_livro;
     novo->prox = NULL;
 
-    if (inicio == NULL)
+    if (inicio_pedido == NULL)
     { // fila vazia
-        inicio = novo;
-        fim = novo;
-        tam++;
+        inicio_pedido = novo;
+        fim_pedido = novo;
+        tam_pedido++;
     }
-    else if (novo->prioridade < fim->prioridade)
+    else if (novo->prioridade < fim_pedido->prioridade)
     {
-        fim->prox = novo;
-        fim = novo;
-        tam++;
+        fim_pedido->prox = novo;
+        fim_pedido = novo;
+        tam_pedido++;
     }
-    else if (novo->prioridade > inicio->prioridade)
+    else if (novo->prioridade > inicio_pedido->prioridade)
     {
-        novo->prox = inicio;
-        inicio = novo;
-        tam++;
+        novo->prox = inicio_pedido;
+        inicio_pedido = novo;
+        tam_pedido++;
     }
     else
     {
-        lista_pedidos *aux = inicio;
-        for (int i = 0; i < tam; i++)
+        lista_pedidos *aux = inicio_pedido;
+        for (int i = 0; i < tam_pedido; i++)
         {
             if (aux->prox->prioridade < novo->prioridade)
             {
                 novo->prox = aux->prox;
                 aux->prox = novo;
-                tam++;
+                tam_pedido++;
                 break;
             }
         }
@@ -51,12 +71,12 @@ void add_lista_pedidos(no_encomenda *pedido)
 void remover_da_fila_de_prioridade()
 {
     lista_pedidos removido;
-    if (inicio != NULL)
+    if (inicio_pedido != NULL)
     {
-        // remover usando o antigo remover do inicio da lista!
+        // remover usando o antigo remover do inicio_pedido da lista!
 
-        lista_pedidos *lixo = inicio;
-        inicio = inicio->prox;
+        lista_pedidos *lixo = inicio_pedido;
+        inicio_pedido = inicio_pedido->prox;
         /*//copia os dados para o retorno!!_______________________________
         removido.campus_aluno = lixo->campus_aluno;
         removido.campus_livro = lixo->campus_livro;
@@ -71,10 +91,10 @@ void remover_da_fila_de_prioridade()
         //______________________________________________________________*/
 
         free(lixo);
-        tam--;
-        if (tam == 1)
+        tam_pedido--;
+        if (tam_pedido == 1)
         {
-            fim = NULL;
+            fim_pedido = NULL;
         }
     }
     printf("PEDIDO ENCAMINHADO!");
@@ -82,20 +102,21 @@ void remover_da_fila_de_prioridade()
 
 void ver_prioridade()
 {
-    if(inicio != NULL){
-    puts("-----------------------------------------------------------------");
-    printf("titulo do livro: %s/n", inicio->titulo_livro);
-    printf("dados do livro: %s/n", inicio->resumo_livro);
-    printf("campus do livro: %s/n", inicio->campus_livro);
-    printf("destino do livro: %s/n", inicio->campus_aluno);
-    puts("-----------------------------------------------------------------");
+    if (inicio_pedido != NULL)
+    {
+        puts("-----------------------------------------------------------------");
+        printf("titulo do livro: %s/n", inicio_pedido->titulo_livro);
+        printf("dados do livro: %s/n", inicio_pedido->resumo_livro);
+        printf("campus do livro: %s/n", inicio_pedido->campus_livro);
+        printf("destino do livro: %s/n", inicio_pedido->campus_aluno);
+        puts("-----------------------------------------------------------------");
     }
-    printf("1 - PEDIDO ENCAMINHADO (REMOVER DA ESPERA)
-            2 - EXIT /n/n");
+    printf("1 - PEDIDO ENCAMINHADO (REMOVER DA ESPERA)\n"
+           "2 - EXIT \n\n");
     int N;
-    scanf("%d",&N);
-    if(N == 1){
+    scanf("%d", &N);
+    if (N == 1)
+    {
         remover_da_fila_de_prioridade();
-
     }
 }
