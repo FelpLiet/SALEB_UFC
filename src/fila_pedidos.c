@@ -1,37 +1,45 @@
 #include "../include/fila_pedidos.h"
 
-lista_pedidos *inicio_pedido = NULL;
-lista_pedidos *fim_pedido = NULL;
+fila_pedidos *inicio_pedido = NULL;
+fila_pedidos *fim_pedido = NULL;
 int tam_pedido = 0;
 
-void add_lista_pedidos(no_encomenda *pedido, char *cpf)
+void add_fila_pedidos(no_encomenda *pedido, char *cpf)
 {
-    lista_pedidos *novo = malloc(sizeof(lista_pedidos));
+    fila_pedidos *novo = malloc(sizeof(fila_pedidos));
 
     char mem[1024] = {0};
-    
-    
-    int mem_size = strlen(busca_nome_acesso(cpf));
-    novo->responsavel_encomenda = (char *)malloc((sizeof(char) * mem_size) + 1);
-    strncpy(novo->responsavel_encomenda, busca_nome_acesso(cpf), mem_size);
-    novo->responsavel_encomenda[mem_size] = '\0';
-    
+    int mem_size;
 
+    mem_size = strlen(pedido->campus_aluno);
+    novo->campus_aluno = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->campus_aluno, pedido->campus_aluno, mem_size);
+    novo->campus_aluno[mem_size] = '\0';
 
-    novo->campus_aluno = campus_aluno;
-    novo->campus_livro = pedido->campus_livro;
+    mem_size = strlen(pedido->campus_livro);
+    novo->campus_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->campus_livro, pedido->campus_livro, mem_size);
+    novo->campus_livro[mem_size] = '\0';
+
     novo->matricula_aluno = pedido->matricula_aluno;
-    novo->nome_aluno = pedido->nome_aluno;
+
+    mem_size = strlen(pedido->nome_aluno);
+    novo->nome_aluno = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->nome_aluno, pedido->nome_aluno, mem_size);
+    novo->nome_aluno[mem_size] = '\0';
+
     novo->prioridade = pedido->prioridade;
 
-    int mem_size = strlen(busca_nome_acesso(cpf));
-    novo->responsavel_encomenda = (char *)malloc((sizeof(char) * mem_size) + 1);
-    strncpy(novo->responsavel_encomenda, busca_nome_acesso(cpf), mem_size);
-    novo->responsavel_encomenda[mem_size] = '\0';
+    mem_size = strlen(pedido->resumo_livro);
+    novo->resumo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->resumo_livro, pedido->resumo_livro, mem_size);
+    novo->resumo_livro[mem_size] = '\0';
 
-    novo->responsavel_trasporte = pedido->responsavel_trasporte;
-    novo->resumo_livro = pedido->resumo_livro;
-    novo->titulo_livro = pedido->titulo_livro;
+    mem_size = strlen(pedido->titulo_livro);
+    novo->titulo_livro = (char *)malloc((sizeof(char) * mem_size) + 1);
+    strncpy(novo->titulo_livro, pedido->titulo_livro, mem_size);
+    novo->titulo_livro[mem_size] = '\0';
+
     novo->prox = NULL;
 
     if (inicio_pedido == NULL)
@@ -54,7 +62,7 @@ void add_lista_pedidos(no_encomenda *pedido, char *cpf)
     }
     else
     {
-        lista_pedidos *aux = inicio_pedido;
+        fila_pedidos *aux = inicio_pedido;
         for (int i = 0; i < tam_pedido; i++)
         {
             if (aux->prox->prioridade < novo->prioridade)
@@ -70,12 +78,12 @@ void add_lista_pedidos(no_encomenda *pedido, char *cpf)
 
 void remover_da_fila_de_prioridade()
 {
-    lista_pedidos removido;
+    fila_pedidos removido;
     if (inicio_pedido != NULL)
     {
         // remover usando o antigo remover do inicio_pedido da lista!
 
-        lista_pedidos *lixo = inicio_pedido;
+        fila_pedidos *lixo = inicio_pedido;
         inicio_pedido = inicio_pedido->prox;
         /*//copia os dados para o retorno!!_______________________________
         removido.campus_aluno = lixo->campus_aluno;

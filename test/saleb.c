@@ -5,7 +5,6 @@
 #include "../include/lista.h"
 #include "../include/lista_acesso.h"
 #include "../include/fila_pedidos.h"
-// bonus por utilizar heap na fila
 
 no_encomenda *raiz_insert = NULL;
 no_encomenda *raiz = NULL;
@@ -101,8 +100,8 @@ int main()
                     if (verificar_acesso_secretario(cpf, senha) == 1)
                     {
                         printf("qualo id para remocao:\n");
-                        scanf("%d",&id);
-                        add_lista_pedidos(buscaRecursiva(raiz, id), cpf);
+                        scanf("%d", &id);
+                        add_fila_pedidos(buscaRecursiva(raiz, id), cpf);
                         apaga_abb(buscaRecursiva(raiz, id));
                         // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
                         // 4 - setar novos dados (faltando)
@@ -139,7 +138,7 @@ int main()
                 printf(" Digite sua senha:\n");
                 char senha[100];
                 scanf("%s", &senha);
-                if (verificar_acesso(cpf, senha) == 1)
+                if (verificar_acesso_transportador(cpf, senha) == 1)
                 {
                     // remover da fila de prioridade
                     remover_da_fila_de_prioridade();
