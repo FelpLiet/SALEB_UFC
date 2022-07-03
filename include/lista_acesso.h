@@ -10,7 +10,9 @@ typedef  struct acess {
     struct acess* prox;
 }acess;
 
-
+acess * inicio_acess;
+acess * fim_acess;
+int tam_acess;
 
 
 int verificar_acesso_secretario(char *cpf, char *senha);

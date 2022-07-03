@@ -10,11 +10,12 @@ typedef struct list {
   struct list *prox;
 }list;
 
+list *inicio;
+list *fim;
+int ids;
 
-void preenche_vec(list *inicio,int vetor_de_id[], int tam_vec);
+void preenche_vec(int vetor_de_id[], int tam_vec);
 
-void add_list(list *inicio, list *fim,int id, char *nome);
-
-void preenche_vec(list *inicio, int vetor_de_id[], int tam_vec);
+void add_list(int id, char *nome);
 
 void imprimir(list *fim,list *aux);

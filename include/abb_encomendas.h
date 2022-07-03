@@ -29,13 +29,17 @@ typedef struct no_encomenda
 	struct no_encomenda *esq;
 }no_encomenda;
 
+no_encomenda *raiz_insert;
+no_encomenda *raiz;
+int tamp_temp;
+
 // busca pelo vertice
 no_encomenda *buscaRecursiva(no_encomenda *no, int id);
 
 // insere um vertice na arvore
 no_encomenda *insere_na_arvore(no_encomenda *no, int id);
 
-no_encomenda *arvore(no_encomenda *raiz, no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim);
+no_encomenda *arvore(int vetor_de_id[], int inicio, int fim);
 
 void apaga_abb(no_encomenda *aux);
 

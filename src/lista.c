@@ -2,7 +2,11 @@
 
 int tam_list = 0;
 
-void preenche_vec(list *inicio,int vetor_de_id[], int tam_vec){
+list *inicio = NULL;
+list *fim = NULL;
+int ids = 1;
+
+void preenche_vec(int vetor_de_id[], int tam_vec){
   list *aux = inicio;
 
   for(int i = 0; i < tam_vec; i++){
@@ -11,7 +15,7 @@ void preenche_vec(list *inicio,int vetor_de_id[], int tam_vec){
   }
 }
 
-void add_list(list *inicio, list *fim,int id, char *nome){
+void add_list(int id, char *nome){
   list *novo = (list*)malloc(sizeof(list));
   novo->id = id;
   novo->nome = nome;

@@ -1,6 +1,8 @@
 #include "../include/abb_encomendas.h"
 
 int tamp_temp = 0;
+no_encomenda *raiz_insert = NULL;
+no_encomenda *raiz = NULL;
 
 
 no_encomenda *buscaRecursiva(no_encomenda *no, int id)
@@ -41,7 +43,7 @@ no_encomenda *insere_na_arvore(no_encomenda *no, int id)
   return no;
 }
 
-no_encomenda *arvore(no_encomenda *raiz, no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim)
+no_encomenda *arvore(int vetor_de_id[], int inicio, int fim)
 {
   if (inicio <= fim)
   {
@@ -52,8 +54,8 @@ no_encomenda *arvore(no_encomenda *raiz, no_encomenda *raiz_insert, int vetor_de
       raiz = raiz_insert;
     }
 
-    arvore(raiz, raiz_insert, vetor_de_id, inicio, meio - 1);
-    arvore(raiz, raiz_insert, vetor_de_id, meio + 1, fim);
+    arvore(vetor_de_id, inicio, meio - 1);
+    arvore(vetor_de_id, meio + 1, fim);
   }
 }
 

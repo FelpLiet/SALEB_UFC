@@ -6,14 +6,6 @@
 #include "../include/lista_acesso.h"
 #include "../include/fila_pedidos.h"
 
-no_encomenda *raiz_insert = NULL;
-no_encomenda *raiz = NULL;
-
-list *inicio = NULL;
-list *fim = NULL;
-
-int ids = 1;
-
 int main()
 {
     carrega_dado_lista_de_permicao();
@@ -56,11 +48,11 @@ int main()
             {
                 apaga_abb(raiz);
             }
-            add_list(inicio, fim, ids, teste.nome_aluno);
+            add_list(ids, teste.nome_aluno);
             int tam_vec = fim->id;
             int vetor_de_id[tam_vec];
-            preenche_vec(inicio, vetor_de_id, tam_vec);
-            arvore(raiz, raiz_insert, vetor_de_id, 0, tam_vec - 1);
+            preenche_vec(vetor_de_id, tam_vec);
+            arvore(vetor_de_id, 0, tam_vec - 1);
             ids++;
             in_ordem(raiz);
 
@@ -99,8 +91,9 @@ int main()
                     scanf("%s", senha);
                     if (verificar_acesso_secretario(cpf, senha) == 1)
                     {
+                        int id_remove;
                         printf("qualo id para remocao:\n");
-                        scanf("%d", &id);
+                        scanf("%d", &id_remove);
                         add_fila_pedidos(buscaRecursiva(raiz, id), cpf);
                         apaga_abb(buscaRecursiva(raiz, id));
                         // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
@@ -134,10 +127,10 @@ int main()
                 // 2 - verificar o usuario
                 printf(" Digite seu cpf:\n");
                 char cpf[100];
-                scanf("%s", &cpf);
+                scanf("%s", cpf);
                 printf(" Digite sua senha:\n");
                 char senha[100];
-                scanf("%s", &senha);
+                scanf("%s", senha);
                 if (verificar_acesso_transportador(cpf, senha) == 1)
                 {
                     // remover da fila de prioridade
