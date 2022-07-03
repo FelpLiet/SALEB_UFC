@@ -35,15 +35,6 @@ void add_list(list *inicio, list *fim,int id, char *nome){
   }
 }
 
-void preenche_vec(list *inicio, int vetor_de_id[], int tam_vec){
-  list *aux = inicio;
-
-  for(int i = 0; i < tam_vec; i++){
-    vetor_de_id[i] = aux->id;
-    aux = aux->prox;
-  }
-}
-
 void imprimir(list *fim,list *aux){
   printf("%d ",aux->id);
   printf("%s", aux->nome);

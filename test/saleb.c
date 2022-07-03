@@ -7,8 +7,8 @@
 #include "../include/fila_pedidos.h"
 // bonus por utilizar heap na fila
 
-NO *raiz_insert = NULL;
-NO *raiz = NULL;
+no_encomenda *raiz_insert = NULL;
+no_encomenda *raiz = NULL;
 
 list *inicio = NULL;
 list *fim = NULL;
@@ -17,21 +17,27 @@ int ids = 1;
 
 int main()
 {
+    carrega_dado_lista_de_permicao();
     char mem[1024] = {0};
+    int id, escolha;
     no_encomenda teste;
 
     printf("\nSISTEMA DE ALOCACAO DE LIVROS ENTRE BIBLIOTECAS DA UFC\n");
     int resp = -1;
     while (resp != 0)
     {
-        printf(" 1 - Encomendar um livro.\n");
-        printf(" 2 - Remover uma encomenda de livro.\n");
-        printf(" 3 - Remover um pedido de livro.\n");
-        printf(" 0 - Sair do sistema!\n");
-        
+        printf("--------------------------------------------------\n"
+               "|                                                |\n"
+               "| 1 - Encomendar um livro                        |\n"
+               "| 2 - Remover uma encomenda de livro             |\n"
+               "| 3 - Remover pedido para transporte             |\n"
+               "| 0 - Sair do sistema                            |\n"
+               "|                                                |\n"
+               "--------------------------------------------------\n");
+
         printf("Digite a funcionalidade desejada:");
-        scanf("%d", &resp);
-        
+        scanf("%d%*c", &resp);
+
         if (resp == 1)
         {
             // encomendar um livro
@@ -44,17 +50,18 @@ int main()
                 teste.nome_aluno[mem_size] = '\0';
             }
 
-            // printf(" Digite a matricula do aluno:\n");
-            // scanf("%d", &teste.matricula_aluno);
+            printf(" Digite a matricula do aluno:\n");
+            scanf("%d%*c", &teste.matricula_aluno);
 
-            if(raiz != NULL){
+            if (raiz != NULL)
+            {
                 apaga_abb(raiz);
             }
-            add_list(inicio, fim, ids, mem);
+            add_list(inicio, fim, ids, teste.nome_aluno);
             int tam_vec = fim->id;
             int vetor_de_id[tam_vec];
             preenche_vec(inicio, vetor_de_id, tam_vec);
-            arvore(raiz, raiz_insert,vetor_de_id,0,tam_vec-1);
+            arvore(raiz, raiz_insert, vetor_de_id, 0, tam_vec - 1);
             ids++;
             in_ordem(raiz);
 
@@ -66,25 +73,65 @@ int main()
         {
             // remover uma encomenda de livro da ABB (id)
             // para remover eu preciso:
-            // 1 - visualizar as encomendas (in_ordem)
-            in_ordem(raiz);
-            // 2 - verificar o usuario
-            printf(" Digite seu cpf:\n");
-            char cpf[100];
-            scanf("%s", &cpf);
-            printf(" Digite sua senha:\n");
-            char senha[100];
-            scanf("%s", &senha);
-            int retorno = verificar(cpf, senha);
-            if (retorno == 1)
-            {
-                // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
-                // 4 - setar novos dados (faltando)
-                // 5 - add_fila(....);
-            }
-            else if (resp == 3)
-            {
+            int estado_encomenda = -1;
+            while (estado_encomenda != 0)
+            { // 1 - visualizar as encomendas (in_ordem)
+                printf("--------------------------------------------------\n"
+                       "|                                                |\n"
+                       "| 1 - Listar id das encomendas                   |\n"
+                       "| 2 - Remover da lista de encomenda pelo id      |\n"
+                       "| 0 - Voltar ao menu                             |\n"
+                       "|                                                |\n"
+                       "--------------------------------------------------\n");
+                printf("Digite a funcionalidade desejada:");
+                scanf("%d%*c", &estado_encomenda);
+                if (estado_encomenda == 1)
+                {
+                    in_ordem(raiz);
+                }
+                else if (estado_encomenda == 2)
+                {
+                    // 2 - verificar o usuario
+                    printf(" Digite seu cpf:\n");
+                    char cpf[100];
+                    scanf("%s", cpf);
+                    printf(" Digite sua senha:\n");
+                    char senha[100];
+                    scanf("%s", senha);
+                    if (verificar_acesso(cpf, senha) == 1)
+                    {
+                        // strcpy(teste.responsavel_encomenda, nome do secretario);
+                        apaga_abb(buscaRecursiva(raiz, id));
+                        // completar_dados_encomenda();
 
+                        // 3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
+                        // 4 - setar novos dados (faltando)
+                        // 5 - add_fila(....);
+                    }
+                    else
+                    {
+                        puts("Usuario nao encontrado");
+                    }
+                }
+                else
+                {
+                    puts("Restornando");
+                }
+            }
+        }
+        else if (resp == 3)
+        {
+
+            printf("--------------------------------------------------\n"
+                   "|                                                |\n"
+                   "| 1 - Remover livro para entrega                 |\n"
+                   "| 0 - Voltar ao menu                             |\n"
+                   "|                                                |\n"
+                   "--------------------------------------------------\n");
+            printf("Digite a funcionalidade desejada:");
+            scanf("%d%*c", &escolha);
+            if (escolha == 1)
+            {
                 // 2 - verificar o usuario
                 printf(" Digite seu cpf:\n");
                 char cpf[100];
@@ -92,27 +139,21 @@ int main()
                 printf(" Digite sua senha:\n");
                 char senha[100];
                 scanf("%s", &senha);
-                int retorno = verificar(cpf, senha);
-                if (retorno == 1)
+                if (verificar_acesso(cpf, senha) == 1)
                 {
                     // remover da fila de prioridade
+                    remover_da_fila_de_prioridade();
                 }
+                else
+                {
+                    puts("Usuario nao encontrado");
+                }
+            }
+            else
+            {
+                puts("Restornando");
             }
         }
     }
-    // codigo jv
-    /*int tam = 7;
-    int vetor_de_id[] = {1, 2, 3, 4, 5, 6, 7};
-
-    raiz = arvore(raiz, raiz_insert, vetor_de_id, 0, tam - 1);
-    printf("Pos Ordem:\n");
-    pos_ordem(raiz);
-    printf("\n\n");
-    printf("In Ordem:\n");
-    in_ordem(raiz);
-    printf("\n\n");
-    printf("Pre Ordem:\n");
-    pre_ordem(raiz);*/
-
     return 0;
 }
