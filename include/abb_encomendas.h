@@ -2,14 +2,13 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
-typedef struct NO
-{
-	int id;
+typedef struct NO {
+  int id;
+  char *nome;
 
-	struct NO *esq;
-	struct NO *dir;
+  struct NO *esq;
+  struct NO *dir;
 } NO;
 
 typedef struct no_encomenda

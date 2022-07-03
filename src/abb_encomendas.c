@@ -57,46 +57,55 @@ NO *arvore(NO *raiz, NO *raiz_insert, int vetor_de_id[], int inicio, int fim)
   }
 }
 
-void pos_ordem(NO *aux)
+void apaga_abb(NO *aux)
 {
+	if (aux == NULL) {
+		return;
+	}
 
-    if (aux->esq != NULL)
-    {
+	apaga_abb(aux->esq);
+	apaga_abb(aux->dir);
+
+	free(aux);
+
+	aux = NULL;
+}
+
+void pos_ordem(NO *aux){
+    
+    if(aux->esq != NULL){
         pos_ordem(aux->esq);
     }
-    if (aux->dir != NULL)
-    {
+    if(aux->dir != NULL){
         pos_ordem(aux->dir);
     }
     printf("ID: ");
     printf("%d\t", aux->id);
+    printf("Nome: ");
+    printf("%s\n", aux->nome);
 }
-void in_ordem(NO *aux)
-{
-
-    if (aux->esq != NULL)
-    {
+void in_ordem(NO *aux){
+    
+    if(aux->esq != NULL){
         in_ordem(aux->esq);
     }
     printf("ID: ");
-    printf("%d", aux->id);
-    printf("\t");
-    if (aux->dir != NULL)
-    {
+    printf("%d\t", aux->id);
+    printf("Nome: ");
+    printf("%s\n", aux->nome);
+    if(aux->dir != NULL){
         in_ordem(aux->dir);
     }
 }
-void pre_ordem(NO *aux)
-{
+void pre_ordem(NO *aux){
     printf("ID: ");
-    printf("%d", aux->id);
-    printf("\t");
-    if (aux->esq != NULL)
-    {
+    printf("%d\t", aux->id);
+    printf("Nome: ");
+    printf("%s\n", aux->nome);
+    if(aux->esq != NULL){
         pre_ordem(aux->esq);
     }
-    if (aux->dir != NULL)
-    {
+    if(aux->dir != NULL){
         pre_ordem(aux->dir);
     }
 }

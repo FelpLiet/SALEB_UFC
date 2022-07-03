@@ -2,12 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/abb_encomendas.h"
+#include "../include/lista.h"
 #include "../include/lista_acesso.h"
 #include "../include/fila_pedidos.h"
 // bonus por utilizar heap na fila
 
 NO *raiz_insert = NULL;
 NO *raiz = NULL;
+
+list *inicio = NULL;
+list *fim = NULL;
+
+int ids = 1;
 
 int main()
 {
@@ -38,9 +44,19 @@ int main()
                 teste.nome_aluno[mem_size] = '\0';
             }
 
-            printf(" Digite a matricula do aluno:\n");
-            scanf("%d", &teste.matricula_aluno);
+            // printf(" Digite a matricula do aluno:\n");
+            // scanf("%d", &teste.matricula_aluno);
 
+            if(raiz != NULL){
+                apaga_abb(raiz);
+            }
+            add_list(inicio, fim, ids, mem);
+            int tam_vec = fim->id;
+            int vetor_de_id[tam_vec];
+            preenche_vec(inicio, vetor_de_id, tam_vec);
+            arvore(raiz, raiz_insert,vetor_de_id,0,tam_vec-1);
+            ids++;
+            in_ordem(raiz);
 
             //... matricula e descricao..
             // criar um funcao para gerar id unico (:D)
@@ -85,7 +101,7 @@ int main()
         }
     }
     // codigo jv
-    int tam = 7;
+    /*int tam = 7;
     int vetor_de_id[] = {1, 2, 3, 4, 5, 6, 7};
 
     raiz = arvore(raiz, raiz_insert, vetor_de_id, 0, tam - 1);
@@ -96,7 +112,7 @@ int main()
     in_ordem(raiz);
     printf("\n\n");
     printf("Pre Ordem:\n");
-    pre_ordem(raiz);
+    pre_ordem(raiz);*/
 
     return 0;
 }
