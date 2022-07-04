@@ -21,10 +21,6 @@ typedef struct list {
   struct list *prox;
 }list;
 
-// list *inicio;
-// list *fim;
-// int ids;
-
 void preenche_vec(int vetor_de_id[], int tam_vec);
 
 void add_list(int id, char *nome, int matricula, char *titulo, char *autor);

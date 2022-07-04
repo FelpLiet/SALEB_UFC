@@ -23,26 +23,14 @@ typedef struct no_encomenda
 #include "fila_pedidos.h"
 #include "lista_acesso.h"
 #include "lista.h"
-typedef struct NO {
-  int id;
-  char *nome;
-
-  struct NO *esq;
-  struct NO *dir;
-} NO;
 
 
-// no_encomenda *raiz_insert;
-// no_encomenda *raiz;
-// int tamp_temp;
 no_encomenda *return_raiz_insert();
 
 no_encomenda *return_raiz();
 
-// busca pelo vertice
 no_encomenda *buscaRecursiva(no_encomenda *no, int id);
 
-// insere um vertice na arvore
 no_encomenda *insere_na_arvore(no_encomenda *no, int id);
 
 void arvore(no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim);

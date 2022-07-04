@@ -33,7 +33,7 @@ int main()
 
         if (resp == 1)
         {
-            // encomendar um livro
+
             printf("Digite o nome do aluno: ");
             if (fgets(mem, sizeof(mem), stdin) != NULL)
             {
@@ -67,6 +67,8 @@ int main()
             reconstroi_arvore(&teste);
 
             tamp_temp++;
+
+            puts("Retornando ao menu principal...");
         }
         else if (resp == 2)
         {
@@ -111,7 +113,11 @@ int main()
                 }
                 else
                 {
-                    puts("Restornando");
+                    puts("Retornando ao menu principal...");
+                }
+                if (return_raiz() == NULL)
+                {
+                    estado_encomenda = 0;
                 }
             }
         }
@@ -150,7 +156,11 @@ int main()
                 }
                 else
                 {
-                    puts("Restornando");
+                    puts("Retornando ao menu principal...");
+                }
+                if (lista_acesso_esta_vazia() == 1)
+                {
+                    estado_entrega = 0;
                 }
             }
         }

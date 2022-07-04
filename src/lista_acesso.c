@@ -1,7 +1,7 @@
 #include "../include/lista_acesso.h"
 
-acess * inicio_acess = NULL;
-acess * fim_acess = NULL;
+acess *inicio_acess = NULL;
+acess *fim_acess = NULL;
 int tam_acess = 0;
 
 void add_lista_de_acesso(char *nome, char *cpf, char *senha, char *cargo_de_acesso)
@@ -15,16 +15,28 @@ void add_lista_de_acesso(char *nome, char *cpf, char *senha, char *cargo_de_aces
     novo->prox = NULL;
 
     if (inicio_acess == NULL)
-    { 
+    {
         inicio_acess = novo;
         fim_acess = novo;
         tam_acess++;
     }
     else
-    { 
+    {
         fim_acess->prox = novo;
         fim_acess = novo;
         tam_acess++;
+    }
+}
+
+int lista_acesso_esta_vazia()
+{
+    if (inicio_acess == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
     }
 }
 
@@ -40,37 +52,23 @@ void carrega_dado_lista_de_permicao()
     add_lista_de_acesso("tanjiro", "464.396", "12345", "transportador");
 }
 
-int verificar_acesso_secretario(char *cpf, char *senha){
-    if((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0 && (strcmp(inicio_acess->cargo_de_acesso, "secretario") == 0))){
+int verificar_acesso_secretario(char *cpf, char *senha)
+{
+    if ((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0 && (strcmp(inicio_acess->cargo_de_acesso, "secretario") == 0)))
+    {
         return 1;
     }
-    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "secretario") == 0))){
-        return 1;
-    }
-
-    acess *aux = inicio_acess->prox;
-
-    for(int i = 0; i < tam_acess - 2; i++){
-        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "secretario") == 0)){
-            return 1;
-        }
-        aux = aux->prox;
-    }
-    return 0;
-} 
-
-int verificar_acesso_transportador(char *cpf, char *senha){
-    if((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0) && (strcmp(inicio_acess->cargo_de_acesso, "transportador") == 0)){
-        return 1;
-    }
-    else if((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "transportador") == 0))){
+    else if ((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "secretario") == 0)))
+    {
         return 1;
     }
 
     acess *aux = inicio_acess->prox;
 
-    for(int i = 0; i < tam_acess - 2; i++){
-        if((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "transportador") == 0)){
+    for (int i = 0; i < tam_acess - 2; i++)
+    {
+        if ((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "secretario") == 0))
+        {
             return 1;
         }
         aux = aux->prox;
@@ -78,24 +76,52 @@ int verificar_acesso_transportador(char *cpf, char *senha){
     return 0;
 }
 
+int verificar_acesso_transportador(char *cpf, char *senha)
+{
+    if ((strcmp(inicio_acess->cpf, cpf) == 0) && (strcmp(inicio_acess->senha, senha) == 0) && (strcmp(inicio_acess->cargo_de_acesso, "transportador") == 0))
+    {
+        return 1;
+    }
+    else if ((strcmp(fim_acess->cpf, cpf) == 0) && (strcmp(fim_acess->senha, senha) == 0 && (strcmp(fim_acess->cargo_de_acesso, "transportador") == 0)))
+    {
+        return 1;
+    }
 
-char* busca_nome_acesso(char * cpf){
-    if((strcmp(inicio_acess->cpf, cpf) == 0)){
+    acess *aux = inicio_acess->prox;
+
+    for (int i = 0; i < tam_acess - 2; i++)
+    {
+        if ((strcmp(aux->cpf, cpf) == 0) && (strcmp(aux->senha, senha) == 0) && (strcmp(aux->cargo_de_acesso, "transportador") == 0))
+        {
+            return 1;
+        }
+        aux = aux->prox;
+    }
+    return 0;
+}
+
+char *busca_nome_acesso(char *cpf)
+{
+    if ((strcmp(inicio_acess->cpf, cpf) == 0))
+    {
         return inicio_acess->nome;
     }
-    else if((strcmp(fim_acess->cpf, cpf) == 0)){
+    else if ((strcmp(fim_acess->cpf, cpf) == 0))
+    {
         return fim_acess->nome;
     }
 
     acess *aux = inicio_acess->prox;
 
-    for(int i = 0; i < tam_acess - 2; i++){
-        if((strcmp(aux->cpf, cpf) == 0)){
+    for (int i = 0; i < tam_acess - 2; i++)
+    {
+        if ((strcmp(aux->cpf, cpf) == 0))
+        {
             return aux->nome;
         }
         aux = aux->prox;
     }
     char nao_encontrado[] = "nome não definido";
-    char * nao_encontrado_pont = nao_encontrado;
+    char *nao_encontrado_pont = nao_encontrado;
     return nao_encontrado_pont;
 }
