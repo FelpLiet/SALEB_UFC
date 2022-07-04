@@ -1,27 +1,24 @@
 #pragma once
 #include "abb_encomendas.h"
-
-typedef struct lista_pedidos
+#include "lista_acesso.h"
+#include "lista.h"
+typedef struct fila_pedidos
 {
-    char *nome_aluno;
+	char *nome_aluno;
 	int matricula_aluno;
 	char *titulo_livro;
-	char *resumo_livro;
+	char *autor_livro;
 	char *campus_livro;
 	char *campus_aluno;
 	char *responsavel_encomenda;
 	char *responsavel_trasporte;
 	int prioridade;
 
-    struct lista_pedidos * prox;
+	struct fila_pedidos *prox;
 
-}lista_pedidos;
+} fila_pedidos;
 
-lista_pedidos * inicio = NULL;
-lista_pedidos * fim = NULL;
-int tam = 0;
-
-void add_lista_pedidos(no_encomenda *pedido);
+void add_fila_pedidos(no_encomenda *pedido, char *cpf);
 
 void remover_da_fila_de_prioridade();
 
