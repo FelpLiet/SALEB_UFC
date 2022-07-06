@@ -1,2 +1,2 @@
 # SALEB_UFC
-Sistema de Alocação de Livos Entre Biblitecas da UFC
+Sistema de Alocação de Livros Entre Biblitecas da UFC
