@@ -1,10 +1,15 @@
 #include "../include/abb_encomendas.h"
 
-
 no_encomenda *raiz_insert = NULL;
 no_encomenda *raiz = NULL;
 
-no_encomenda *return_raiz_insert(){
+void null_raiz()
+{
+    raiz = NULL;
+}
+
+no_encomenda *return_raiz_insert()
+{
     return raiz_insert;
 }
 
@@ -48,7 +53,6 @@ no_encomenda *insere_na_arvore(no_encomenda *no, int id)
         no->matricula_aluno = aux->matricula_aluno;
         no->titulo_livro = aux->titulo_livro;
         no->autor_livro = aux->autor_livro;
-
 
         no->esq = NULL;
         no->dir = NULL;
@@ -97,12 +101,10 @@ void apaga_abb(no_encomenda *aux)
     {
         return;
     }
-    if (raiz == aux){
-        raiz = NULL;
-    }
+
     apaga_abb(aux->esq);
     apaga_abb(aux->dir);
-    
+
     free(aux->nome_aluno);
     free(aux->titulo_livro);
     free(aux->autor_livro);
@@ -111,53 +113,60 @@ void apaga_abb(no_encomenda *aux)
     aux = NULL;
 }
 
+no_encomenda *abb_remove(no_encomenda *r, int v)
+{
 
-no_encomenda *abb_remove(no_encomenda *r, int v){
+    if (r == NULL)
+    {
 
-  if(r == NULL){
-
-    return NULL;
-
-  }else if(r->id > v){
-
-    r->esq = abb_remove(r->esq, v);
-
-  }else if(r->id < v){
-
-    r->dir = abb_remove(r->dir, v);
-
-  }else{
-
-    if(r->esq == NULL && r->dir == NULL){
-
-      r = NULL;
-
-    }else if(r->esq == NULL){
-
-      no_encomenda *t = r;
-
-      r = r->esq;
-
-    }else{
-
-      no_encomenda *f = r->esq;
-
-      while(f->dir != NULL){
-
-        f = f->dir;
-
-      }
-
-      r->id = f->id;
-      r->nome_aluno = f->nome_aluno;
-
-      f->id = v;
-
-      r->esq = abb_remove(r->esq, v);
-
+        return NULL;
     }
+    else if (r->id > v)
+    {
 
-  }
+        r->esq = abb_remove(r->esq, v);
+    }
+    else if (r->id < v)
+    {
+
+        r->dir = abb_remove(r->dir, v);
+    }
+    else
+    {
+
+        if (r->esq == NULL && r->dir == NULL)
+        {
+
+            r = NULL;
+        }
+        else if (r->esq == NULL)
+        {
+
+            no_encomenda *t = r;
+
+            r = r->dir;
+        }
+        else
+        {
+
+            no_encomenda *f = r->esq;
+
+            while (f->dir != NULL)
+            {
+
+                f = f->dir;
+            }
+
+            r->id = f->id;
+            r->nome_aluno = f->nome_aluno;
+            r->titulo_livro = f->titulo_livro;
+            r->autor_livro = f->autor_livro;
+
+            f->id = v;
+
+            r->esq = abb_remove(r->esq, v);
+        }
+    }
 }
 
 void copia_no(no_encomenda *origem, no_encomenda *destino)
@@ -211,7 +220,11 @@ void pos_ordem(no_encomenda *aux)
 }
 void in_ordem(no_encomenda *aux)
 {
-
+    if (raiz == NULL)
+    {
+        puts("VAZIA!");
+        return;
+    }
     if (aux->esq != NULL)
     {
         in_ordem(aux->esq);

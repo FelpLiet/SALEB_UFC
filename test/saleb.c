@@ -84,10 +84,11 @@ int main()
                        "| 0 - Voltar ao menu                             |\n"
                        "|                                                |\n"
                        "--------------------------------------------------\n");
-                printf("Digite a funcionalidade desejada:");
+                printf("Digite a funcionalidade desejada: ");
                 scanf("%d%*c", &estado_encomenda);
                 if (estado_encomenda == 1)
                 {
+
                     in_ordem(return_raiz());
                 }
                 else if (estado_encomenda == 2)
@@ -104,7 +105,9 @@ int main()
                     if (verificar_acesso_secretario(cpf, senha) == 1)
                     {
                         add_fila_pedidos(buscaRecursiva(return_raiz(), id_remove), cpf);
-                        apaga_abb(buscaRecursiva(return_raiz(), id_remove));
+                        abb_remove(return_raiz(), id_remove);
+                        remover_na_list(id_remove);
+                        tamp_temp--;
                     }
                     else
                     {
@@ -114,6 +117,10 @@ int main()
                 else
                 {
                     puts("Retornando ao menu principal...");
+                }
+                if (tamp_temp == 0)
+                {
+                    null_raiz();
                 }
                 if (return_raiz() == NULL)
                 {

@@ -27,6 +27,8 @@ void add_list(int id, char *nome, int matricula, char *titulo, char *autor);
 
 void imprimir(list *aux);
 
+void remover_na_list(int id);
+
 void reconstroi_arvore(no_encomenda *teste);
 
 list *return_inicio_list();

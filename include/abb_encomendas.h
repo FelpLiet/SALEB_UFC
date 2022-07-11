@@ -24,6 +24,7 @@ typedef struct no_encomenda
 #include "lista_acesso.h"
 #include "lista.h"
 
+void null_raiz();
 
 no_encomenda *return_raiz_insert();
 
@@ -32,6 +33,8 @@ no_encomenda *return_raiz();
 no_encomenda *buscaRecursiva(no_encomenda *no, int id);
 
 no_encomenda *insere_na_arvore(no_encomenda *no, int id);
+
+no_encomenda *abb_remove(no_encomenda *r, int v);
 
 void arvore(no_encomenda *raiz_insert, int vetor_de_id[], int inicio, int fim);
 
