@@ -97,10 +97,15 @@ void apaga_abb(no_encomenda *aux)
     {
         return;
     }
-
+    if (raiz == aux){
+        raiz = NULL;
+    }
     apaga_abb(aux->esq);
     apaga_abb(aux->dir);
-
+    
+    free(aux->nome_aluno);
+    free(aux->titulo_livro);
+    free(aux->autor_livro);
     free(aux);
 
     aux = NULL;
